@@ -26,7 +26,7 @@ public class AppConfig {
     }
 
     @Bean
-    public JavaMailSender getEmail(
+    public JavaMailSenderImpl getEmail(
             @Value("${gmail.host}") String host,
             @Value("${gmail.port}") int port,
             @Value("${gmail.username}") String username,

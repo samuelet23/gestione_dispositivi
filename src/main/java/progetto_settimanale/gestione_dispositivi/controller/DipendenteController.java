@@ -60,22 +60,22 @@ public class DipendenteController {
         checkNotFoundElementException(bindingResult);
         return dipendenteService.updateDipendente(id,dipendente);
     }
-    @PatchMapping("/{id}")
+    @PatchMapping("/{id}/cognome")
     public Dipendente updateCognome(@PathVariable int id, @RequestBody String cognome,BindingResult bindingResult) throws NotFoundElementException {
         checkNotFoundElementException(bindingResult);
         return  dipendenteService.updateCognome(id, cognome);
     }
-    @PatchMapping("/{id}")
+    @PatchMapping("/{id}/nome")
     public Dipendente updateNome(@PathVariable int id, @RequestBody String nome, BindingResult bindingResult) throws NotFoundElementException {
         checkNotFoundElementException(bindingResult);
         return  dipendenteService.updateNome(id, nome);
     }
-    @PatchMapping("/{id}")
+    @PatchMapping("/{id}/username")
     public Dipendente updateUsername(@PathVariable int id, @RequestBody String username, BindingResult bindingResult) throws NotFoundElementException {
         checkNotFoundElementException(bindingResult);
         return  dipendenteService.updateUsername(id, username);
     }
-    @PatchMapping("/{id}")
+    @PatchMapping("/{id}/email")
     public Dipendente updateEmail(@PathVariable int id, @RequestBody String email, BindingResult bindingResult) throws NotFoundElementException {
         checkNotFoundElementException(bindingResult);
         return  dipendenteService.updateEmail(id, email);
