@@ -3,6 +3,9 @@ package progetto_settimanale.gestione_dispositivi.service;
 import org.aspectj.weaver.ast.Not;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
 import progetto_settimanale.gestione_dispositivi.Exception.DispositivoNonAssegnatoException;
@@ -26,6 +29,8 @@ public class DipendenteService {
 
     @Autowired
     private DispositivoService dispositivoService;
+    @Autowired
+    private JavaMailSenderImpl javaMailSender;
 
     public List<Dipendente> getAll() throws NotFoundElementException {
         List<Dipendente> dipendenti =dipendenteRepository.findAll();
@@ -49,9 +54,15 @@ public class DipendenteService {
         d.setCognome(dipendente.getCognome());
         d.setUsername(dipendente.getUsername());
         d.setEmail(dipendente.getEmail());
-
+        sendEmail(
+                d.getEmail(),
+                d,
+                "Registrazione al servizio di Gestione Dispositivi",
+                "Ciao"+dipendente.getUsername() +"Siamo lieti di darti il benvenuto al nostro servizio di gestione dispositivi! Siamo qui per semplificare la tua esperienza nella gestione dei dispositivi, offrendoti soluzioni efficienti e personalizzate per le tue esigenze. Con il nostro servizio, avrai accesso a una gamma di strumenti e funzionalità progettate per ottimizzare il controllo e la sicurezza dei tuoi dispositivi. Che tu stia gestendo dispositivi personali o aziendali, siamo qui per supportarti in ogni passo del processo.");
         return dipendenteRepository.save(d);
     }
+
+
 
     public Dipendente updateDipendente(int id, DipendenteRequest dipendente) throws NotFoundElementException {
         Dipendente d = getById(id);
@@ -59,28 +70,56 @@ public class DipendenteService {
         d.setCognome(dipendente.getCognome());
         d.setUsername(dipendente.getUsername());
         d.setEmail(dipendente.getEmail());
-
-        return d;
+        sendEmail(d.getEmail(),
+                d,
+                "Aggiornamento Dati Dipendente",
+                "Il dipendente con id="+d.getId()+" è stato aggiornato adesso le sue credenziali sono;" +
+                        "Nome: "+d.getNome()+
+                        "Cognome: "+d.getCognome()+
+                        "Username: "+d.getUsername()+
+                        "Le tue credenziali sono state aggironate con successo"
+        );
+        return dipendenteRepository.save(d);
     }
     public Dipendente updateNome(int id, String nome) throws NotFoundElementException {
         Dipendente d = getById(id);
         d.setNome(nome);
-        return d;
+        sendEmail(d.getEmail(),
+                d,
+                "Aggiornamento nome",
+                "Ciao" +d.getNome()+ ", Il tuo nome è stato aggiornato con successo");
+        return dipendenteRepository.save(d);
     }
     public Dipendente updateCognome(int id, String cognome) throws NotFoundElementException {
         Dipendente d = getById(id);
         d.setCognome(cognome);
-        return d;
+        sendEmail(d.getEmail(),
+                d,
+                "Aggiornamento cognome",
+                "Ciao"+ d.getCognome()+ " ,Il tuo cognome è stato aggiornato ");
+        return dipendenteRepository.save(d);
+
     }
     public Dipendente updateUsername(int id, String username) throws NotFoundElementException {
         Dipendente d = getById(id);
         d.setUsername(username);
-        return d;
+        sendEmail(d.getEmail(),
+                d,
+                "Aggiornamento Username",
+                "Ciao"+d.getUsername()+"Il tuo username è stato aggiornato");
+        return dipendenteRepository.save(d);
+
     }
     public Dipendente updateEmail(int id, String email) throws NotFoundElementException {
         Dipendente d = getById(id);
         d.setEmail(email);
-        return d;
+        sendEmail(d.getEmail(),
+                d,
+                "Aggiornamento email",
+                "Ciao"+ d.getUsername()+", La tua email è stata aggiornata con sucesso"
+                );
+        return dipendenteRepository.save(d);
+
     }
 
     public void deleteDipendente(int id) throws NotFoundElementException {
@@ -122,10 +161,19 @@ public class DipendenteService {
         dispositivo.setDipendente(null);
         dipendente.getDispositivi().remove(dispositivo);
 
-        return dipendente;
+        return dipendenteRepository.save(dipendente);
+
 
     }
 
 
+
+
+    private void sendEmail(String email, Dipendente dipendente,String testoSubject,String testoEmail){
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setTo(email);
+        message.setSubject(testoSubject);
+        message.setText(testoEmail);
+    }
 
 }
