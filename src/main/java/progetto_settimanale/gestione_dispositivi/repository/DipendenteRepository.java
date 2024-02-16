@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 import progetto_settimanale.gestione_dispositivi.model.Dipendente.Dipendente;
 
 @Repository
-public interface DipendenteRepository extends JpaRepository<Dipendente, Integer>, PagingAndSortingRepository<Dipendente,Integer> {
+public interface DipendenteRepository extends JpaRepository<Dipendente, Integer>{
 }

@@ -10,7 +10,7 @@ import progetto_settimanale.gestione_dispositivi.model.Type.StatoDispositivo;
 import java.util.List;
 
 @Repository
-public interface DispositivoRepository extends JpaRepository<Dispositivo, Integer>, PagingAndSortingRepository<Dispositivo, Integer> {
+public interface DispositivoRepository extends JpaRepository<Dispositivo, Integer> {
 
     @Query("SELECT d FROM Dispositivo d WHERE d.statoDispositivo = :statoDispositivo")
     List<Dispositivo> findAllByStatoDispositivo(StatoDispositivo statoDispositivo);
