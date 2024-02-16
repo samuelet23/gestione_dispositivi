@@ -1,6 +1,8 @@
 package progetto_settimanale.gestione_dispositivi.Exception;
 
+import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -18,5 +20,28 @@ public class ResponseExceptionHandler {
     public ErrorType exceptionHandler(Exception e){
         return new ErrorType(e.getMessage());
     }
+
+    @ExceptionHandler(ElementAlreadyAssignedException.class)
+    @ResponseStatus(HttpStatus.NOT_ACCEPTABLE)
+    public ErrorType elementAlreadyAssignedExceptionHandler(ElementAlreadyAssignedException e){
+        return new ErrorType(e.getMessage());
+    }
+    @ExceptionHandler(DispositivoNonAssegnatoException.class)
+    @ResponseStatus(HttpStatus.NOT_IMPLEMENTED)
+    public ErrorType dispositivoNonAssegnatoExceptionHandler(DispositivoNonAssegnatoException e){
+        return new ErrorType(e.getMessage());
+    }
+    @ExceptionHandler(DispositivoInManutenzioneException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorType dispositivoInManutenzioneExceptionHandler(DispositivoInManutenzioneException e){
+        return new ErrorType(e.getMessage());
+    }
+    @ExceptionHandler(DispositvoDismessoException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorType dispositivoDismessoExceptionHandler(DispositvoDismessoException e){
+        return new ErrorType(e.getMessage());
+    }
+
+
 
 }

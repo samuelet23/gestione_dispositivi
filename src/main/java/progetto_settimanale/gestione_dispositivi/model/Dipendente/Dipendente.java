@@ -4,7 +4,9 @@ import jakarta.persistence.*;
 import lombok.Data;
 import progetto_settimanale.gestione_dispositivi.model.Dispositivo.Dispositivo;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Data
@@ -27,6 +29,6 @@ public class Dipendente {
     private String email;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "dipendente")
-    private List<Dispositivo> dispositivi;
+    private Set<Dispositivo> dispositivi = new HashSet<>();
 }
 

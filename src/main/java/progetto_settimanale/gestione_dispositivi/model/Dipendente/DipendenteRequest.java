@@ -39,5 +39,5 @@ public class DipendenteRequest {
     )
     private String email;
 
-    private List<Integer> idDispositivi;
+//    private List<Integer> idDispositivi;
 }
