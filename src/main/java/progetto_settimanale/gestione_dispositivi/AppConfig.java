@@ -28,7 +28,7 @@ public class AppConfig {
     @Bean
     public JavaMailSender getEmail(
             @Value("${gmail.host}") String host,
-            @Value("${gmail.port}") String port,
+            @Value("${gmail.port}") int port,
             @Value("${gmail.username}") String username,
             @Value("${gmail.password}") String password,
             @Value("${gmail.props.protocol}") String protocol,
@@ -39,7 +39,7 @@ public class AppConfig {
 
         JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
         mailSender.setHost(host);
-        mailSender.setPort(587);
+        mailSender.setPort(port);
         mailSender.setUsername(username);
         mailSender.setPassword(password);
         Properties props = mailSender.getJavaMailProperties();
