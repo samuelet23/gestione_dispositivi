@@ -27,6 +27,8 @@ public class DipendenteRequest {
     @Size(min = 3, message = "Il cognome deve contenere almeno 4 caratteri")
     private String cognome;
 
+    private String img;
+
     @NotNull
     @Email(
             message = "inserisci un email esistente",

@@ -1,7 +1,5 @@
 package progetto_settimanale.gestione_dispositivi.service;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
@@ -13,7 +11,6 @@ import progetto_settimanale.gestione_dispositivi.model.Dipendente.DipendenteRequ
 import progetto_settimanale.gestione_dispositivi.model.Dispositivo.Dispositivo;
 import progetto_settimanale.gestione_dispositivi.model.Dispositivo.DispositivoRequest;
 import progetto_settimanale.gestione_dispositivi.model.Type.StatoDispositivo;
-import progetto_settimanale.gestione_dispositivi.model.Type.TipoDispositivo;
 import progetto_settimanale.gestione_dispositivi.repository.DispositivoRepository;
 
 import java.util.List;
@@ -24,7 +21,6 @@ public class DispositivoService {
 
     @Autowired
     private DispositivoRepository dispositivoRepository;
-
 
     public List<Dispositivo> getAll() throws NotFoundElementException {
         List<Dispositivo> dispositivi =dispositivoRepository.findAll();
@@ -57,38 +53,12 @@ public List<Dispositivo> getAllDismessi() throws NotFoundElementException {
         return optionalDispositivo.get();
     }
 
-    public Dispositivo saveDispositivo(DispositivoRequest dispositivo)throws IllegalArgumentException {
+    public Dispositivo saveDispositivo(DispositivoRequest dispositivo) {
         Dispositivo d = new Dispositivo();
-        String tipoDispositivoString = String.valueOf(dispositivo.getTipoDispositivo());
-        String statoDispositivoString = String.valueOf(dispositivo.getStatoDispositivo());
-
-        boolean tipoDispositivoValido = false;
-        for (TipoDispositivo tipo : TipoDispositivo.values()) {
-            if (tipo.name().equalsIgnoreCase(tipoDispositivoString)) {
-                tipoDispositivoValido = true;
-                break;
-            }
-        }
-
-        boolean statoDispositivoValido = false;
-        for (StatoDispositivo stato : StatoDispositivo.values()) {
-            if (stato.name().equalsIgnoreCase(statoDispositivoString)) {
-                statoDispositivoValido = true;
-                break;
-            }
-        }
-
-        if (tipoDispositivoValido && statoDispositivoValido) {
-            d.setTipoDispositivo(dispositivo.getTipoDispositivo());
-            d.setStatoDispositivo(dispositivo.getStatoDispositivo());
-            return dispositivoRepository.save(d);
-        } else {
-            String errorMessage = "Tipo di dispositivo non valido: " + tipoDispositivoString +"oppure Stato di dispositivo non valido: " + statoDispositivoString;
-            throw new IllegalArgumentException(errorMessage);
-        }
+        d.setTipoDispositivo(dispositivo.getTipoDispositivo());
+        d.setStatoDispositivo(dispositivo.getStatoDispositivo());
+        return dispositivoRepository.save(d);
     }
-
-
     public Dispositivo updateDispositivo(int id, DispositivoRequest dispositivo) throws NotFoundElementException {
         Dispositivo d = new Dispositivo();
         d.setStatoDispositivo(dispositivo.getStatoDispositivo());
