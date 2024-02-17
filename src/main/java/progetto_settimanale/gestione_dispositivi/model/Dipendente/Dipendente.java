@@ -1,5 +1,6 @@
 package progetto_settimanale.gestione_dispositivi.model.Dipendente;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import progetto_settimanale.gestione_dispositivi.model.Dispositivo.Dispositivo;
@@ -14,7 +15,7 @@ public class Dipendente {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "dipendente_id")
-    @SequenceGenerator(name = "dipendente_id", initialValue = 0, allocationSize = 1)
+    @SequenceGenerator(name = "dipendente_id", initialValue = 1, allocationSize = 1)
     private int id;
 
     @Column(unique = true)
@@ -28,6 +29,7 @@ public class Dipendente {
     @Column(unique = true)
     private String email;
 
+    @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "dipendente")
     private Set<Dispositivo> dispositivi = new HashSet<>();
 }

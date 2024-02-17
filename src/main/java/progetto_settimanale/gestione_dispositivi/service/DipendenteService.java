@@ -26,6 +26,8 @@ import java.util.stream.Collectors;
 public class DipendenteService {
     @Autowired
     private DipendenteRepository dipendenteRepository;
+    @Autowired
+    private DispositivoRepository dispositivoRepository;
 
     @Autowired
     private DispositivoService dispositivoService;
@@ -133,7 +135,7 @@ public class DipendenteService {
         return dipendenteRepository.save(dipendente);
     }
 
-    public Dipendente assegnaDispositivo(int idDipendente, int idDispositivo) throws NotFoundElementException {
+    public Dispositivo assegnaDispositivo(int idDipendente, int idDispositivo) throws NotFoundElementException {
         Dipendente dipendente = getById(idDipendente);
         Dispositivo dispositivo = dispositivoService.getById(idDispositivo);
 
@@ -143,9 +145,8 @@ public class DipendenteService {
 
         dispositivo.setStatoDispositivo(StatoDispositivo.ASSEGNATO);
         dispositivo.setDipendente(dipendente);
-        dipendente.getDispositivi().add(dispositivo);
 
-        return dipendenteRepository.save(dipendente);
+        return dispositivoRepository.save(dispositivo);
 
     }
 

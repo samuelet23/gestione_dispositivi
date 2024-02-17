@@ -11,7 +11,6 @@ import java.time.LocalDate;
 public class ErrorType {
 
     private  String message;
-    private  HttpStatus status;
     private  LocalDate dateError;
 
     public ErrorType(){
@@ -24,7 +23,6 @@ public class ErrorType {
 
     public ErrorType(String message, HttpStatus status){
         this.message = message;
-        this.status = status;
         makeDateErrorFinal();
     }
 

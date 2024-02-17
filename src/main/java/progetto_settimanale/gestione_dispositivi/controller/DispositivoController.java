@@ -3,6 +3,7 @@ package progetto_settimanale.gestione_dispositivi.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import progetto_settimanale.gestione_dispositivi.Exception.*;
 import progetto_settimanale.gestione_dispositivi.model.Dipendente.Dipendente;
@@ -22,54 +23,47 @@ public class DispositivoController {
     private DispositivoService dispositivoService;
 
     @GetMapping("")
-    public List<Dispositivo> getAll(BindingResult bindingResult) throws NotFoundElementException {
-        checkNotFoundElementException(bindingResult);
+    public List<Dispositivo> getAll() throws NotFoundElementException {
         return dispositivoService.getAll();
     }
 
     @GetMapping("/inManutenzione")
-    public List<Dispositivo> getAllInManutenzione(BindingResult bindingResult) throws NotFoundElementException {
-       checkNotFoundElementException(bindingResult);
+    public List<Dispositivo> getAllInManutenzione() throws NotFoundElementException {
         return dispositivoService.getAllInManutenzione();
     }
     @GetMapping("/dismessi")
-    public List<Dispositivo> getAllDismessi(BindingResult bindingResult) throws NotFoundElementException {
-       checkNotFoundElementException(bindingResult);
+    public List<Dispositivo> getAllDismessi() throws NotFoundElementException {
         return dispositivoService.getAllDismessi();
     }
 
     @GetMapping("/{id}")
-    public Dispositivo getDispositivoById(@PathVariable int id, BindingResult bindingResult) throws NotFoundElementException {
-        checkNotFoundElementException(bindingResult);
+    public Dispositivo getDispositivoById(@PathVariable int id ) throws NotFoundElementException {
         return dispositivoService.getById(id);
     }
 
     @PostMapping("")
-    public Dispositivo saveDispositivo(@RequestBody DispositivoRequest dispositivo, BindingResult bindingResult) throws Exception {
+    public Dispositivo saveDispositivo(@RequestBody @Validated  DispositivoRequest dispositivo, BindingResult bindingResult) throws Exception {
         checkException(bindingResult);
         return dispositivoService.saveDispositivo(dispositivo);
     }
 
     @PutMapping("/{id}")
-    public Dispositivo updateDispositivo (@PathVariable int id, @RequestBody DispositivoRequest dispositivo, BindingResult bindingResult) throws NotFoundElementException {
+    public Dispositivo updateDispositivo (@PathVariable int id, @RequestBody @Validated DispositivoRequest dispositivo, BindingResult bindingResult) throws NotFoundElementException {
         checkNotFoundElementException(bindingResult);
         return dispositivoService.updateDispositivo(id,dispositivo);
     }
 
-    @PatchMapping("/{id}")
-    public Dispositivo updateStatoDispositivoInManutenzione(@PathVariable int id, BindingResult bindingResult) throws NotFoundElementException {
-        checkNotFoundElementException(bindingResult);
+    @PatchMapping("/{id}/inManutenzione")
+    public Dispositivo updateStatoDispositivoInManutenzione(@PathVariable int id ) throws NotFoundElementException {
         return dispositivoService.setinManutenzione(id);
     }
-    @PatchMapping("/{id}")
-    public Dispositivo updateStatoDispositivoDismesso(@PathVariable int id, BindingResult bindingResult) throws NotFoundElementException {
-        checkNotFoundElementException(bindingResult);
+    @PatchMapping("/{id}/dismesso")
+    public Dispositivo updateStatoDispositivoDismesso(@PathVariable int id ) throws NotFoundElementException {
         return dispositivoService.setDismesso(id);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteDispositivo(@PathVariable int id,BindingResult bindingResult) throws NotFoundElementException {
-        checkNotFoundElementException(bindingResult);
+    public void deleteDispositivo(@PathVariable int id) throws NotFoundElementException {
         dispositivoService.deleteDispositivo(id);
     }
 
