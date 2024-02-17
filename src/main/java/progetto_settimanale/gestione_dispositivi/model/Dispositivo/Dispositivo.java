@@ -21,7 +21,7 @@ public class Dispositivo {
     @Enumerated(EnumType.STRING)
     private StatoDispositivo statoDispositivo;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne()
     @JoinColumn(name = "dipendente_id")
     private Dipendente dipendente;
 }
