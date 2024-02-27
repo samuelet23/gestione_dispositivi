@@ -2,12 +2,9 @@ package progetto_settimanale.gestione_dispositivi.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.validation.BindingResult;
 import progetto_settimanale.gestione_dispositivi.Exception.DispositivoInManutenzioneException;
 import progetto_settimanale.gestione_dispositivi.Exception.DispositvoDismessoException;
 import progetto_settimanale.gestione_dispositivi.Exception.NotFoundElementException;
-import progetto_settimanale.gestione_dispositivi.model.Dipendente.Dipendente;
-import progetto_settimanale.gestione_dispositivi.model.Dipendente.DipendenteRequest;
 import progetto_settimanale.gestione_dispositivi.model.Dispositivo.Dispositivo;
 import progetto_settimanale.gestione_dispositivi.model.Dispositivo.DispositivoRequest;
 import progetto_settimanale.gestione_dispositivi.model.Type.StatoDispositivo;

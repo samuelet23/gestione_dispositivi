@@ -1,13 +1,9 @@
 package progetto_settimanale.gestione_dispositivi.service;
 
-import org.aspectj.weaver.ast.Not;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Service;
-import org.springframework.validation.BindingResult;
 import progetto_settimanale.gestione_dispositivi.Exception.DispositivoNonAssegnatoException;
 import progetto_settimanale.gestione_dispositivi.Exception.ElementAlreadyAssignedException;
 import progetto_settimanale.gestione_dispositivi.Exception.NotFoundElementException;
@@ -20,7 +16,6 @@ import progetto_settimanale.gestione_dispositivi.repository.DispositivoRepositor
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class DipendenteService {

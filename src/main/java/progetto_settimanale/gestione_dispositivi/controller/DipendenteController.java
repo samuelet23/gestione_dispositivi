@@ -1,14 +1,13 @@
 package progetto_settimanale.gestione_dispositivi.controller;
 
 import com.cloudinary.Cloudinary;
-import jakarta.mail.Multipart;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import progetto_settimanale.gestione_dispositivi.Exception.*;
+import progetto_settimanale.gestione_dispositivi.Exception.NotFoundElementException;
 import progetto_settimanale.gestione_dispositivi.model.Dipendente.Dipendente;
 import progetto_settimanale.gestione_dispositivi.model.Dipendente.DipendenteRequest;
 import progetto_settimanale.gestione_dispositivi.model.Dispositivo.Dispositivo;

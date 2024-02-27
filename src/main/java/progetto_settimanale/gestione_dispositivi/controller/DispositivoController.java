@@ -6,8 +6,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import progetto_settimanale.gestione_dispositivi.Exception.*;
-import progetto_settimanale.gestione_dispositivi.model.Dipendente.Dipendente;
-import progetto_settimanale.gestione_dispositivi.model.Dipendente.DipendenteRequest;
 import progetto_settimanale.gestione_dispositivi.model.Dispositivo.Dispositivo;
 import progetto_settimanale.gestione_dispositivi.model.Dispositivo.DispositivoRequest;
 import progetto_settimanale.gestione_dispositivi.service.DispositivoService;

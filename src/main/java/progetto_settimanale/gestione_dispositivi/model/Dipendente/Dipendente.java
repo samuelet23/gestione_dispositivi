@@ -6,7 +6,6 @@ import lombok.Data;
 import progetto_settimanale.gestione_dispositivi.model.Dispositivo.Dispositivo;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity

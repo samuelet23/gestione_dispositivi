@@ -1,13 +1,10 @@
 package progetto_settimanale.gestione_dispositivi.model.Dipendente;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Embedded;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.OneToMany;
-import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.Data;
-
-import java.util.List;
 
 @Data
 public class DipendenteRequest {
